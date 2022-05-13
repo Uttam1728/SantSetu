@@ -87,13 +87,13 @@ WSGI_APPLICATION = 'ParamhansaSetu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ParamhansaSetu',
+        'NAME': 'deae96vprkmk44',
 
-        'USER': 'postgres',
+        'USER': 'rkjfmszfgglvay',
 
-        'PASSWORD': '1234',
+        'PASSWORD': '73706846a689ef7b90be2b48a6b2c7b1d153ad99eb8371ef77e6b6914f6d77b7',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-3-224-164-189.compute-1.amazonaws.com',
 
         'PORT': '5432',
     }
