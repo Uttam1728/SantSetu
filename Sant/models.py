@@ -41,6 +41,7 @@ class PurvashramDetails(models.Model):
 
 class DikshaDetails(models.Model):
     type = models.CharField(max_length=10, choices=DikshaType, verbose_name="પ્રકાર")
+    name = models.CharField(max_length=50,verbose_name="દીક્ષિત નામ",default='')
     Date = models.DateField(null=None, blank=None, verbose_name="દીક્ષા દિન")
     place = models.CharField(max_length=25, blank=None, null=None, verbose_name="સ્થળ")
     event = models.CharField(max_length=50, blank=None, null=None, verbose_name="સમૈયા/ઉત્સવ")
