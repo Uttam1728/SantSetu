@@ -18,6 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+admin.site.site_header = 'પરમહંસ સેતુ'
+admin.site.site_title = 'પરમહંસ સેતુ'
+admin.site.enable_nav_sidebar = False
+admin.site.site_url = None
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
