@@ -7,6 +7,7 @@ django-client-side-image-cropping==0.1.10
 django-phonenumber-field==6.1.0
 django-phonenumbers==1.0.1
 django-storages==1.12.3
+gunicorn==20.1.0
 jmespath==0.10.0
 phonenumbers==8.12.48
 Pillow==9.1.0
