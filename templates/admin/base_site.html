@@ -1,0 +1,61 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block title %}
+{{ site_title|default:_('Django site admin') }}
+
+{% endblock %}
+
+{% block extrahead %}
+
+<meta name="theme-color" content="#79AEC8">
+<link rel="shortcut icon" href="{% static 'img/utsav.png' %}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="manifest" href='/manifest.json'>
+
+<!--<link rel="apple-touch-icon" href="{% static 'img/utsav.png' %}">-->
+<!--<script type="text/javascript">-->
+<!--    // Initialize the service worker-->
+<!--    if ('serviceWorker' in navigator) {-->
+<!--        navigator.serviceWorker.register( "/serviceworker.js", {-->
+<!--            scope:'/' // <-&#45;&#45; THIS BIT IS REQUIRED-->
+<!--        }).then (function (registration) {-->
+<!--            //Registration was successful-->
+<!--            console.log('django-progresssive-web -app: ServiceWorker registration successful with scope: ', registration.scope);-->
+<!--        }, function (err) {-->
+<!--            // registration failed :(-->
+<!--            console.log("django-progressive-web -app: ServiceWorker registration failed: ", err);-->
+<!--        });-->
+<!--    }-->
+
+
+
+
+
+
+
+<!--</script>-->
+{% endblock %}
+
+{% block extrastyle  %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mybase.css' %}">
+
+{% endblock %}
+{% block branding %}
+<center id="guruparampara_1">
+    <img src="{% static 'img/swaminarayan.png' %}" width="50px" height="50px"/>
+    <img src="{% static 'img/gunatitanandswami.png' %}" width="50px" height="50px"/>
+</center>
+<center id="guruparampara_2">
+    <img src="{% static 'img/bhagataji_maharaj.png' %}" width="50px" height="50px"/>
+    <img src="{% static 'img/Shastriji_Maharaj.png' %}" width="50px" height="50px"/>
+    <img src="{% static 'img/yogiji_maharaj.png' %}" width="50px" height="50px"/>
+    <img src="{% static 'img/psm.png' %}" width="50px" height="50px"/>
+    <img src="{% static 'img/msm.png' %}" width="50px" height="50px"/>
+</center>
+
+
+<h1 id="site-name" style="text-align: center; font-size:30px"><a href="{% url 'admin:index' %}">
+    {{site_header|default:_('Django administration') }}</a></h1>
+
+{% endblock %}
+<!--'/static/img/swaminarayan.png','/static/img/gunatitanandswami.png','/static/img/bhagataji_maharaj.png','/static/img/Shastriji_Maharaj.png','/static/img/yogiji_maharaj.png','/static/img/psm.png','/static/img/msm.png'-->

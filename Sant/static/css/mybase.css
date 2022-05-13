@@ -1,0 +1,41 @@
+/* Set the background color of body to tan */
+#guruparampara_1,#guruparampara_2 {
+    display: inline;
+  }
+#site-name {
+  display: inline;
+  margin-left: 100px !important;
+}
+.dcsic_wrapper.has_image .dcsic_current_img{
+display: block;
+}
+  /* On screens that are 766px or less, set the background color to blue */
+  @media screen and (max-width: 766px) {
+    #guruparampara_1,#guruparampara_2 {
+        display: block ;
+      }
+      #site-name {
+        display: block ;
+        margin : 0px !important;
+      }
+
+      .dcsic_current_img{
+        width: 100px;
+        margin-bottom: 20px !important;
+        height: 100px;
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+       }
+  }
+  
+  .homebg {
+
+    background-image: url(../img/homebg.jpg);
+    background-attachment: fixed !important;
+    /*overflow:hidden;*/
+    background-size: inherit;
+    background-repeat: repeat-y;
+    background-position: center center;
+}
+
