@@ -42,6 +42,20 @@ class AttachmentsInline(admin.StackedInline):
     }
     classes = ['collapse']
 
+class AttachmentsReadInline(admin.StackedInline):
+    model = Attachments
+    extra = 0
+    formfield_overrides = {
+        ImageField: {'widget': ClientsideCroppingWidget(
+            width=500,
+            height=300,
+            preview_width=250,
+            preview_height=150,
+        ), },
+    }
+    classes = ['collapse']
+    readonly_fields = ('photolink', 'discripttion')
+
 
 class SantAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -110,7 +124,7 @@ class SantRead(Sant):
 
 class SantProxiAdmin(SantAdmin):
     readonly_fields = ('Name', 'english_name', 'mobile_no','remark')
-
+    inlines = [PurvashramDetailsInline, DikshaDetailsInline, AnuvrutiDetailsInline, AttachmentsReadInline]
     class Media:
         css = {'all': ("client_side_image_cropping/croppie.css", "client_side_image_cropping/cropping_widget.css",)}
         js = ("client_side_image_cropping/croppie.min.js", "client_side_image_cropping/cropping_widget.js",)
