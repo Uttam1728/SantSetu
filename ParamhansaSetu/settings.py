@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Sant',
 'client_side_image_cropping',
 'phonenumber_field',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,19 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'Sant/static'),
 )
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'Sant/static/myjs', 'serviceworker.js')
+PWA_APP_ICONS = [{'src': '/static/img/utsav.png', 'sizes': '512x512'},
+                 {'src': '/static/img/utsav.png', 'sizes': '512x512', "purpose": "maskable"}]
+PWA_APP_NAME = 'પરમહંસ સેતુ'
+PWA_APP_DESCRIPTION = 'પરમહંસ સેતુ'
+PWA_APP_START_URL = '/admin'
+
+TIME_INPUT_FORMATS = [
+    '%I:%M:%S %p',  # 6:22:44 PM
+    '%I:%M %p',  # 6:22 PM
+    '%I %p',  # 6 PM
+    '%H:%M:%S',     # '14:30:59'
+    '%H:%M:%S.%f',  # '14:30:59.000200'
+    '%H:%M',        # '14:30'
+]
