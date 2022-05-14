@@ -35,6 +35,22 @@ class Sant(models.Model):
         else:
             s = '<img  height="80px" width="80px" src="/static/img/yuvak.png" >'
         return format_html(s)
+
+    def save(self):
+        # if self.ProfilePhoto:
+        #     self.ProfilePhoto = self.compressImage(self.ProfilePhoto)
+        if self.pk:
+
+            sant = Sant.objects.get(pk=self.pk)
+            if sant.Photo and self.Photo:
+                old_url = sant.Photo.url.split('/')[-1]
+                new_url = self.Photo.url.split('/')[-1]
+                if old_url != new_url:
+                    sant.Photo.delete(save=False)
+
+        super(Sant, self).save()
+
+
     class Meta:
         verbose_name_plural = "પૂ.સંત"
         verbose_name = "પૂ.સંત"
@@ -100,6 +116,28 @@ class Attachments(models.Model):
         else:
             s = '<a href="#" target="_blank" ></a>'
         return format_html(s)
+
+    def save(self):
+        # if self.ProfilePhoto:
+        #     self.ProfilePhoto = self.compressImage(self.ProfilePhoto)
+        if self.pk:
+
+            attachment = Attachments.objects.get(pk=self.pk)
+            if attachment.photo and self.photo:
+                old_url = self.photo.url.split('/')[-1]
+                new_url = attachment.photo.url.split('/')[-1]
+                if old_url != new_url:
+                    attachment.photo.delete(save=False)
+
+        super(Attachments, self).save()
+
+    def delete(self, using=None, keep_parents=False):
+        if self.pk:
+
+            attachment = Attachments.objects.get(pk=self.pk)
+            attachment.photo.delete(save=False)
+
+        super(Attachments, self).delete(using=using,keep_parents=keep_parents)
 
     class Meta:
         verbose_name_plural = "ફોટો"
