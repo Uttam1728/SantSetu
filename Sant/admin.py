@@ -42,7 +42,7 @@ class AttachmentsInline(admin.StackedInline):
     }
     classes = ['collapse']
 
-class AttachmentsReadInline(admin.StackedInline):
+class AttachmentsReadInline(admin.TabularInline):
     model = Attachments
     extra = 0
     formfield_overrides = {
@@ -54,7 +54,8 @@ class AttachmentsReadInline(admin.StackedInline):
         ), },
     }
     classes = ['collapse']
-    readonly_fields = ('photolink', 'discripttion')
+    exclude = ('photo', 'photolink', )
+    readonly_fields = ('image_priview', 'discripttion', 'imagelink')
 
 
 class SantAdmin(admin.ModelAdmin):
@@ -66,15 +67,19 @@ class SantAdmin(admin.ModelAdmin):
             preview_height=150,
         ), },
     }
-    list_display = ('__str__', 'santimage', 'WhatsApp', 'Call', 'SMS', 'remark')
+    ordering = ['Name']
+    list_display = ('FullName', 'santimage', 'WhatsApp', 'Call', 'SMS', 'remark')
     inlines = (PurvashramDetailsInline, DikshaDetailsInline, AnuvrutiDetailsInline, AttachmentsInline)
-    # list_filter = ('Name', 'mobile_no')
     search_fields = ('Name', 'mobile_no', 'english_name')
-    fieldsets = ()
-    list_display_links = ('__str__',)
+    list_display_links = ('FullName',)
     fieldsets = (("Profile", {"fields": ["Photo", "Name", "english_name", "mobile_no", 'remark' ],
                               }),
                  )
+
+    def FullName(self, obj):
+        return  "પૂજ્ય " + obj.Name
+    FullName.admin_order_field = 'Name'
+    FullName.short_description = "નામ"
 
     def santimage(self, obj):
         if obj.Photo:
@@ -88,7 +93,7 @@ class SantAdmin(admin.ModelAdmin):
 
     def WhatsApp(self, obj):
         buttons = ''
-        buttons += "<a href='https://wa.me/+91{}' target='_blank'><i class='fa fa-whatsapp' style='font-size:30px;color:green'></i></a>".format(
+        buttons += "<a href='https://wa.me/{}' target='_blank'><i class='fa fa-whatsapp' style='font-size:30px;color:green'></i></a>".format(
             obj.mobile_no)
         return format_html(buttons)
 
@@ -96,7 +101,7 @@ class SantAdmin(admin.ModelAdmin):
 
     def Call(self, obj):
         buttons = ''
-        buttons += "<a href='tel:+91{}' target='_blank'> <i class='fa fa-volume-control-phone' style='font-size:27px;color:deepskyblue;'></i> </a>".format(
+        buttons += "<a href='tel:{}' target='_blank'> <i class='fa fa-volume-control-phone' style='font-size:27px;color:deepskyblue;'></i> </a>".format(
             obj.mobile_no)
         return format_html(buttons)
 
@@ -104,7 +109,7 @@ class SantAdmin(admin.ModelAdmin):
 
     def SMS(self, obj):
         buttons = ''
-        buttons += "<a href='sms:+91{}' target='_blank'> <i class='fa fa-commenting-o' style='font-size:27px;color:lightblue;'></i> </a>".format(
+        buttons += "<a href='sms:{}' target='_blank'> <i class='fa fa-commenting-o' style='font-size:27px;color:lightblue;'></i> </a>".format(
             obj.mobile_no)
         return format_html(buttons)
 
@@ -116,6 +121,7 @@ class SantAdmin(admin.ModelAdmin):
 
 
 class SantRead(Sant):
+
     class Meta:
         proxy = True
         verbose_name_plural = "પૂ.સંત વિગત"
@@ -123,7 +129,11 @@ class SantRead(Sant):
 
 
 class SantProxiAdmin(SantAdmin):
-    readonly_fields = ('Name', 'english_name', 'mobile_no','remark')
+    # fieldsets = (("Profile", {"fields": ["PhotoPreview", "Name", "english_name", "mobile_no", 'remark'],
+    #                           }),
+    #              )
+    # exclude = ("Photo",)
+    readonly_fields = ('PhotoPreview', 'Name', 'english_name', 'mobile_no','remark')
     inlines = [PurvashramDetailsInline, DikshaDetailsInline, AnuvrutiDetailsInline, AttachmentsReadInline]
     class Media:
         css = {'all': ("client_side_image_cropping/croppie.css", "client_side_image_cropping/cropping_widget.css",)}
