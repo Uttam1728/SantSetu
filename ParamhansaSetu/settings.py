@@ -23,17 +23,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_e7h91%d9v(f5k0$h!jbf#6a#ay0h*t)^4u%ukruop&)jab)(k'
+# SECRET_KEY = '_e7h91%d9v(f5k0$h!jbf#6a#ay0h*t)^4u%ukruop&)jab)(k'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='_e7h91%d9v(f5k0$h!jbf#6a#ay0h*t)^4u%ukruop&)jab)(k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'paramhansa-setu.herokuapp.com']
-
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'paramhansa-setu.herokuapp.com', 'santparichay.onrender.com']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'render.apps.RenderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
